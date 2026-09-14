@@ -1,0 +1,65 @@
+name: 🐛 Documentation Extraction / Conversion Issue
+description: Report a Starlight site where content, sidebar, code blocks, or tables were incorrectly converted
+title: "[Bug]: "
+labels: ["bug", "conversion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting an extraction issue! starlight-to-md is fully open source.
+        To help reproduce and fix this, please provide details about the documentation page.
+  - type: input
+    id: doc_url
+    attributes:
+      label: Documentation Page URL
+      description: The public URL of the Starlight documentation page where the issue occurred (or specify if internal/private).
+      placeholder: https://starlight.astro.build/getting-started/
+    validations:
+      required: true
+  - type: dropdown
+    id: issue_type
+    attributes:
+      label: What went wrong?
+      description: Select the primary symptom observed.
+      options:
+        - "Code blocks: Missing syntax, line number noise, or mangled formatting"
+        - "Tabs: Tab panel content missing or interleaved"
+        - "Callouts / Asides: Tip/Note/Warning not converted to GitHub Alert"
+        - "Tables: Column alignment or table formatting broken"
+        - "Sidebar: Pages missing or incorrect category order"
+        - "Detection: Site was not detected as Starlight"
+        - "Other formatting issue"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs Actual Behavior
+      description: What did you expect to see in the resulting Markdown vs what was generated?
+      placeholder: "Expected code block in language 'sh', but received unformatted plain text..."
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostic
+    attributes:
+      label: Diagnostic Info / Markdown Sample
+      description: |
+        Paste the diagnostic info copied by the extension, or a short snippet of the problematic Markdown / HTML.
+      placeholder: |
+        ```json
+        {
+          "url": "https://...",
+          "version": "1.0.0",
+          "siteTitle": "..."
+        }
+        ```
+    validations:
+      required: false
+  - type: input
+    id: browser
+    attributes:
+      label: Browser & OS
+      description: e.g. Chrome 128 on macOS, Firefox 130 on Windows
+      placeholder: Chrome on macOS
+    validations:
+      required: false

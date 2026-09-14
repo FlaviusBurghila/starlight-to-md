@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "Starlight to Markdown",
+  "version": "1.0.0",
+  "description": "Extract Starlight documentation into clean, structured Markdown files and ZIP archives",
+  "permissions": [
+    "downloads",
+    "tabs",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "dist/content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "dist/background.js"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "starlight-to-md@flavius.dev",
+      "strict_min_version": "109.0"
+    }
+  }
+}

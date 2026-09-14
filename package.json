@@ -1,0 +1,45 @@
+{
+  "name": "starlight-to-md",
+  "version": "1.0.0",
+  "description": "Extract Astro Starlight documentation into clean, LLM-ready Markdown via CLI or browser extension",
+  "type": "module",
+  "bin": {
+    "starlight-to-md": "./bin/cli.js"
+  },
+  "scripts": {
+    "dev": "node build.js --watch",
+    "build": "node build.js",
+    "pretest": "npm run build",
+    "test": "node --test tests/utils.test.js tests/parser.test.js tests/converter.test.js tests/bundler.test.js tests/cli.test.js",
+    "test:e2e": "node --test tests/e2e.test.js",
+    "test:showcase": "node --test tests/showcase-e2e.test.js",
+    "test:all": "npm test && npm run test:e2e && npm run test:showcase"
+  },
+  "keywords": [
+    "starlight",
+    "astro",
+    "markdown",
+    "cli",
+    "browser-extension",
+    "chrome-extension",
+    "firefox-addon",
+    "documentation",
+    "llm",
+    "rag"
+  ],
+  "author": "Flavius Burghila",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FlaviusBurghila/starlight-to-md.git"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "playwright-core": "^1.63.0"
+  },
+  "dependencies": {
+    "jsdom": "^30.0.1",
+    "jszip": "^3.10.2",
+    "turndown": "^7.2.4"
+  }
+}

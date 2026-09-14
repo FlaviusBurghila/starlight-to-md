@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starlight to Markdown</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="brand">
+        <svg class="brand-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        </svg>
+        <span class="brand-title">Starlight to Markdown</span>
+      </div>
+      <div class="header-links">
+        <a id="githubLink" href="https://github.com/FlaviusBurghila/starlight-to-md" class="header-icon-link" title="Open Source on GitHub" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <div id="siteStatus" class="status-card status-loading">
+      <div class="status-dot"></div>
+      <div class="status-details">
+        <div id="siteTitle" class="status-title">Checking page...</div>
+        <div id="pageCount" class="status-subtitle">Scanning for Starlight signatures</div>
+      </div>
+    </div>
+
+    <div id="actionsGroup" class="button-group">
+      <button id="convertCurrentBtn" class="btn btn-primary" disabled>
+        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Download Current Page (.md)
+      </button>
+
+      <button id="batchZipBtn" class="btn btn-secondary" disabled>
+        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+        </svg>
+        Download All Pages (.zip)
+      </button>
+
+      <button id="batchSingleBtn" class="btn btn-secondary" disabled>
+        <svg class="btn-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        Download Single Markdown (.md)
+      </button>
+    </div>
+
+    <div class="options-container">
+      <label class="toggle-control" for="frontmatterToggle" title="Toggle between YAML metadata header or pure plain Markdown">
+        <input type="checkbox" id="frontmatterToggle" checked>
+        <span class="toggle-switch"></span>
+        <span id="toggleText" class="toggle-text">Include YAML frontmatter</span>
+      </label>
+      <span id="toggleBadge" class="format-badge">YAML Metadata</span>
+    </div>
+
+    <!-- Progress section -->
+    <div id="progressSection" class="progress-section hidden">
+      <div class="progress-header">
+        <span id="progressLabel" class="progress-label">Extracting documentation...</span>
+        <span id="progressPercent" class="progress-percent">0%</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div id="progressBar" class="progress-bar-fill" style="width: 0%"></div>
+      </div>
+      <div id="progressDetail" class="progress-detail">Preparing pages...</div>
+      <button id="cancelBtn" class="btn btn-danger">Cancel Operation</button>
+    </div>
+
+    <div id="messageBox" class="message-box hidden"></div>
+
+    <footer class="footer">
+      <div class="footer-status">Agent-optimized Markdown with YAML frontmatter</div>
+      <div class="footer-links">
+        <button id="reportIssueBtn" class="report-link" title="Report extraction issue or broken site on GitHub">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <span>Report issue / Feedback</span>
+        </button>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../dist/popup.js"></script>
+</body>
+</html>
