@@ -2,6 +2,8 @@
 
 Extract Astro [Starlight](https://starlight.astro.build) documentation sites into clean, LLM-ready Markdown via CLI or browser extension.
 
+[![Chrome Web Store](https://img.shields.io/badge/Chrome_Web_Store-Starlight_to_Markdown-4285F4?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/starlight-to-markdown/njegnmnbddnkpmkenljdacehicedokek)
+
 Designed for developer workflows with AI coding assistants (**Claude Code, Cursor, Copilot, Gemini**).
 
 ---
@@ -201,11 +203,21 @@ starlight.zip
 
 ## Browser Extension
 
-Export documentation while browsing in Chrome, Firefox, Edge, or Brave.
+Export documentation while browsing in Chrome, Firefox, Edge, Brave, or Arc.
 
 ### Installation
 
-#### Chrome / Edge / Brave / Arc:
+#### Chrome Web Store (Recommended)
+
+Install the official extension directly for Google Chrome, Brave, Microsoft Edge, Arc, Opera, and other Chromium browsers:
+
+[![Available in the Chrome Web Store](https://img.shields.io/badge/Chrome_Web_Store-Starlight_to_Markdown-4285F4?logo=googlechrome&logoColor=white&style=for-the-badge)](https://chromewebstore.google.com/detail/starlight-to-markdown/njegnmnbddnkpmkenljdacehicedokek)
+
+👉 **[Install from the Chrome Web Store](https://chromewebstore.google.com/detail/starlight-to-markdown/njegnmnbddnkpmkenljdacehicedokek)** *(Extension ID: `njegnmnbddnkpmkenljdacehicedokek`)*
+
+#### Manual Installation (From Source)
+
+##### Chrome / Edge / Brave / Arc:
 1. Clone this repository and run:
    ```bash
    npm install && npm run build
@@ -213,7 +225,7 @@ Export documentation while browsing in Chrome, Firefox, Edge, or Brave.
 2. Navigate to `chrome://extensions/` and enable **Developer mode** (top right).
 3. Click **Load unpacked** and select the repository root directory.
 
-#### Firefox:
+##### Firefox:
 1. Run `npm install && npm run build`.
 2. Navigate to `about:debugging#/runtime/this-firefox`.
 3. Click **Load Temporary Add-on...** and select `manifest.json`.

@@ -35,6 +35,8 @@ Thank you for your interest in contributing to `starlight-to-md`! We welcome bug
    - Toggle **Developer mode** on (top right).
    - Click **Load unpacked** and select the `starlight-to-md` directory.
 
+   *(Note: If you only want to use the extension without modifying code, install it directly from the [Chrome Web Store](https://chromewebstore.google.com/detail/starlight-to-markdown/njegnmnbddnkpmkenljdacehicedokek)).*
+
 ---
 
 ## Testing Guidelines

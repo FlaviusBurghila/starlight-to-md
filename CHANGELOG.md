@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-09-13
 
 ### Added
+- **Chrome Web Store Release**: Published official browser extension on the [Chrome Web Store](https://chromewebstore.google.com/detail/starlight-to-markdown/njegnmnbddnkpmkenljdacehicedokek).
 - **Multi-Era Starlight Detection Engine**: Robust multi-marker scoring system detecting Starlight sites across all eras (v0.1.0 through v0.42.0+), including sites with custom domains and stripped generator tags.
 - **Expressive Code Parser**: Converts syntax-highlighted code blocks to clean fenced Markdown while retaining file path banners (`title="..."`) and stripping copy buttons and line numbers.
 - **Multi-Variant Tab Unpacking (`<starlight-tabs>`)**: Unrolls all tab panels (e.g. `npm`, `pnpm`, `yarn`, `bun`, `cargo`) into labeled Markdown subsections to provide complete technical context for AI agents.
