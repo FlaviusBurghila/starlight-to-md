@@ -4,7 +4,14 @@
   "description": "Extract Astro Starlight documentation into clean, LLM-ready Markdown via CLI or browser extension",
   "type": "module",
   "bin": {
-    "starlight-to-md": "./bin/cli.js"
+    "starlight-to-md": "bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
   },
   "scripts": {
     "dev": "node build.js --watch",
@@ -31,8 +38,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/FlaviusBurghila/starlight-to-md.git"
+    "url": "git+https://github.com/FlaviusBurghila/starlight-to-md.git"
   },
+  "bugs": {
+    "url": "https://github.com/FlaviusBurghila/starlight-to-md/issues"
+  },
+  "homepage": "https://github.com/FlaviusBurghila/starlight-to-md#readme",
   "devDependencies": {
     "esbuild": "^0.28.2",
     "playwright-core": "^1.63.0"
