@@ -1,6 +1,6 @@
 {
   "name": "starlight-to-md",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Extract Astro Starlight documentation into clean, LLM-ready Markdown via CLI or browser extension",
   "type": "module",
   "bin": {
