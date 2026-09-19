@@ -1,0 +1,70 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (validate build, test, and package without publishing)'
+        type: boolean
+        default: false
+
+# Enforce least-privilege permissions across the entire workflow
+permissions: {}
+
+jobs:
+  release:
+    name: Build, Test & Publish to npm
+    # Prevent unauthorized execution on forked repositories
+    if: github.repository_owner == 'FlaviusBurghila'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read     # Read repository source code
+      id-token: write    # Required for npm OIDC Trusted Publishing & Provenance attestation
+
+    steps:
+      - name: Checkout repository
+        # Pin action to full commit SHA to prevent supply-chain tampering of actions
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          # Security: Do not persist git credentials on the runner
+          persist-credentials: false
+
+      - name: Setup Node.js
+        # Pin action to full commit SHA
+        uses: actions/setup-node@1d0ff469b7ec7b3cb9d8673fde0c81c44821de2a # v4.2.0
+        with:
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+
+      - name: Verify clean dependency installation
+        # npm ci enforces exact cryptographic hashes from package-lock.json
+        run: npm ci
+
+      - name: Run build
+        run: npm run build
+
+      - name: Run test suite
+        run: npm test
+
+      - name: Verify package version matches tag (on tag push)
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          echo "Tag version:     $TAG_VERSION"
+          echo "Package version: $PKG_VERSION"
+          if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then
+            echo "::error::Tag version ($TAG_VERSION) does not match package.json version ($PKG_VERSION)!"
+            exit 1
+          fi
+
+      - name: Inspect npm package contents (Dry Run)
+        run: npm pack --dry-run
+
+      - name: Publish to npm with Provenance
+        if: ${{ !inputs.dry_run }}
+        run: npm publish --provenance --access public
