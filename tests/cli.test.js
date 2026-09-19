@@ -84,8 +84,9 @@ test('CLI prints version and exits with code 0 on --version', async () => {
     const exitCode = await runCli(['--version']);
 
     // Then: Exit code is 0 and version is displayed
+    const pkg = JSON.parse(fs.readFileSync(path.resolve('package.json'), 'utf8'));
     assert.equal(exitCode, 0);
-    assert.match(stdoutOutput, /^v1\.0\.0/);
+    assert.match(stdoutOutput, new RegExp(`^v${pkg.version.replace(/\./g, '\\.')}`));
   } finally {
     console.log = originalLog;
   }
